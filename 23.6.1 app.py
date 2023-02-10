@@ -5,14 +5,14 @@ from config import TOKEN, val, symbols
 
 bot = telebot.TeleBot(TOKEN)
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands = ['start', 'help'])
 def hello(message: telebot.types.Message):
  bot.reply_to(message, 'Привет, я твой помощник бот-конвертер валют, для того, чтобы начать работу нужно ввести команду :\n\
 <Название валюты> <В какую валюту перевести> <Количество переводимой валюты>\n\
 Увидеть все доступные валюты: /values\n\
 Десятичные значения вводятся через точку.')
 
-@bot.message_handler(commands=['values'])
+@bot.message_handler(commands = ['values'])
 def values(message: telebot.types.Message):
     text = 'Доступные валюты:'
     for k in val.keys():
@@ -23,7 +23,7 @@ def values(message: telebot.types.Message):
 def convert(message: telebot.types.Message):
     message_args = message.text.split()
     try:
-        if len(message_args)!=3:
+        if len(message_args)! = 3:
             raise extensions.WrongMessageException
         base, quote, amount = message_args
         extensions.ExceptionAnalyzer.exception_check(base, quote, amount)
